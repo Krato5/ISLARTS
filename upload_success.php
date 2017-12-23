@@ -1,0 +1,817 @@
+
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>WeUI-Uploader</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+<!--    lightbox-->
+<title>A Really Cool jQuery Gallery Demo | Tutorialzine</title>
+<link rel="stylesheet" type="text/css" href="lightbox/css/jquery.lightbox-0.5.css" />
+<link rel="stylesheet" type="text/css" href="css/box_demo.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+<script type="text/javascript" src="js/box_script.js"></script>
+<!--    lightbox-->
+   
+   
+   <!--    WeUI-->
+   <!-- <link rel='stylesheet prefetch' href="css/weui.css">
+
+        <link rel="stylesheet" href="css/style.css">
+
+
+    <link rel="stylesheet" href="style.css" type="text/css" />-->
+<!--    WeUI-->
+    
+    
+    <!--    Multipush-->
+      <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="css/categories_normalize.css">
+ <!--    Multipush-->
+  
+  
+  
+        <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      @import url(//fonts.googleapis.com/css?family=Lato:300,400,700);
+*,
+*:after,
+*::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body,
+.container,
+.scroller {
+  height: 100%;
+}
+
+[class*="ion-"]::before {
+  margin: 0 0.6em 0 0;
+}
+
+.scroller {
+  overflow-y: scroll;
+}
+
+.scroller,
+.scroller-inner {
+  position: relative;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-trigger {
+  position: relative;
+  padding-left: 60px;
+  font-size: 0.9em;
+}
+
+.menu-trigger:before {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 40px;
+  height: 6px;
+  background: #fff;
+  box-shadow: 0 6px rgba(0, 0, 0, 0), 0 12px #FFF, 0 18px rgba(0, 0, 0, 0), 0 24px #FFF;
+  content: '';
+}
+
+.mp-pusher {
+  position: relative;
+  left: 0;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.mp-menu {
+  position: absolute;  
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 300px;
+  height: 100%;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  -moz-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+
+.mp-level {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top left, #50A3A2,#53E3A6);
+  -webkit-transform: translate3d(-100%, 0, 0);
+  -moz-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+
+.mp-pusher::after,
+.mp-level::after,
+.mp-level::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  opacity: 0;
+}
+
+.mp-pusher::after,
+.mp-level::after {
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+  -moz-transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+  transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
+}
+
+.mp-level::after {
+  z-index: -1;
+}
+
+.mp-pusher.mp-pushed::after,
+.mp-level.mp-level-overlay::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.mp-level.mp-level-overlay {
+  cursor: pointer;
+}
+
+.mp-level.mp-level-overlay.mp-level::before {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 1;
+}
+
+.mp-pusher,
+.mp-level {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+/* overlap */
+
+.mp-overlap .mp-level.mp-level-open {
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translate3d(-40px, 0, 0);
+  -moz-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0);
+}
+/* First level */
+
+.mp-menu > .mp-level,
+.mp-menu > .mp-level.mp-level-open,
+.mp-menu.mp-overlap > .mp-level,
+.mp-menu.mp-overlap > .mp-level.mp-level-open {
+  box-shadow: none;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+/* cover */
+
+.mp-cover .mp-level.mp-level-open {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.mp-cover .mp-level.mp-level-open > ul > li > .mp-level:not(.mp-level-open) {
+  -webkit-transform: translate3d(-100%, 0, 0);
+  -moz-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+/* content style */
+
+.mp-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mp-menu h2 {
+  margin: 0;
+  padding: 1em;
+  color: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  font-weight: 300;
+  font-size: 2em;
+}
+
+.mp-menu.mp-overlap h2::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 8px;
+  font-size: 75%;
+  line-height: 1.8;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.1s 0.3s;
+  -moz-transition: opacity 0.3s, -moz-transform 0.1s 0.3s;
+  transition: opacity 0.3s, transform 0.1s 0.3s;
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.mp-menu.mp-cover h2 {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1em;
+}
+
+.mp-overlap .mp-level.mp-level-overlay > h2::before {
+  opacity: 1;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.mp-menu ul li > a {
+  display: block;
+  padding: 0.7em 1em 0.7em 1.8em;
+  outline: none;
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+  font-size: 1.4em;
+  -webkit-transition: background 0.3s, box-shadow 0.3s;
+  -moz-transition: background 0.3s, box-shadow 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.mp-menu ul li::before {
+  position: absolute;
+  left: 10px;
+  z-index: -1;
+  color: rgba(0, 0, 0, 0.2);
+  line-height: 3.5;
+}
+
+.mp-level > ul > li:first-child > a {
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2), inset 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.mp-menu ul li a:hover,
+.mp-level > ul > li:first-child > a:hover {
+  background: rgb(247, 151, 31);
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
+}
+
+.mp-menu .mp-level.mp-level-overlay > ul > li > a,
+.mp-level.mp-level-overlay > ul > li:first-child > a {
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
+}
+
+.mp-level > ul > li:first-child > a:hover,
+.mp-level.mp-level-overlay > ul > li:first-child > a {
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0), inset 0 1px rgba(0, 0, 0, 0);
+}
+/* seems like Chrome 34.0.1847.131 needs the second shadow otherwise the transition breaks */
+
+.mp-back {
+  background: rgba(0, 0, 0, 0.1);
+  outline: none;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  display: block;
+  font-size: 0.8em;
+  padding: 1em;
+  position: relative;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.1);
+  -webkit-transition: background 0.3s;
+  -moz-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.mp-back::after {
+  font-family: 'Ionicons';
+  position: absolute;
+  content: "\f10a";
+  right: 10px;
+  font-size: 1.3em;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.mp-menu .mp-level.mp-level-overlay > .mp-back,
+.mp-menu .mp-level.mp-level-overlay > .mp-back::after {
+  background: transparent;
+  box-shadow: none;
+  color: transparent;
+}
+
+.no-csstransforms3d .mp-pusher,
+.no-js .mp-pusher {
+  padding-left: 300px;
+}
+
+.no-csstransforms3d .mp-menu .mp-level,
+.no-js .mp-menu .mp-level {
+  display: none;
+}
+
+.no-csstransforms3d .mp-menu > .mp-level,
+.no-js .mp-menu > .mp-level {
+  display: block;
+}
+
+body {
+  background: linear-gradient(to top left, #50A3A2,#53E3A6);
+  color: #fff;
+  font-weight: 300;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #f7f7f7;
+  outline: none;
+}
+
+a:hover,
+a:focus {
+  color: #fff;
+  outline: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.codrops-header {
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+.codrops-header {
+  margin: 0 auto;
+  padding: 2em;
+  background: rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.codrops-header h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 2.625em;
+  line-height: 1.3;
+}
+
+.codrops-header span {
+  display: block;
+  padding: 0 0 0.6em 0.1em;
+  font-size: 60%;
+  opacity: 0.7;
+}
+
+.content {
+  padding: 4em 2em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.block {
+  float: left;
+  padding: 1em 3em;
+}
+
+.block-40 {
+  width: 40%;
+}
+
+.block-60 {
+  width: 117%;
+}
+
+.block p {
+  margin: 0;
+  padding: 0 1em 0.6em;
+  font-size: 1.8em;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 69em) {
+  .block {
+    float: none;
+    width: 100% !important;
+    padding: 1em;
+  }
+}
+
+@media screen and (max-width: 25em) {
+  body {font-size: 80%;}
+}
+    </style>
+<!-- prefix-->
+    
+        <script src="js/prefixfree.min.js"></script>
+<!-- prefix-->
+
+  </head>
+
+  <body>
+  
+  <!-- multipush-->
+    <div class="container">
+  <div class="mp-pusher" id="mp-pusher">
+    <nav id="mp-menu" class="mp-menu">
+      <div class="mp-level">
+        <h2 class="ion-earth">All Categories</h2>
+        <ul>
+          <li class="ion-chevron-left">
+            <a class="ion-monitor" href="#">Islarts themes </a>
+            <div class="mp-level">
+              <h2 class="ion-monitor">Islarts themes</h2>
+              <a class="mp-back" href="#">back</a>
+              <ul>
+                <li class="ion-chevron-left">
+                  <a class="ion-iphone" href="#">Islarts Site Templates</a>
+                  <div class="mp-level">
+                    <h2>Mobile Phones</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islarts Creatives</a></li>
+                      <li><a href="#">Islarts Corporate</a></li>
+                      <li><a href="#">Islarts Technology</a></li>
+                      <li><a href="#">Islarts NonProfit</a></li>
+                      <li><a href="#">Islarts Entertainment</a></li>
+                      <li><a href="#">Islarts Personal</a></li>
+                      <li><a href="#">Islarts Admin</a></li>
+                      <li><a href="#">Islarts Mobile</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="ion-chevron-left">
+                  <a class="ion-monitor" href="#">Islarts CMS</a>
+                  <div class="mp-level">
+                    <h2>Islarts CMS</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islarts CMS</a></li>
+                      <li><a href="#">Islarts CMS</a></li>
+                      
+                    </ul>
+                  </div>
+                </li>
+                <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts Blogs</a>
+                  <div class="mp-level">
+                    <h2>Islarts Blogs</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Blog</a></li>
+                      <li><a href="#">Islart Blog</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts Forums</a>
+                  <div class="mp-level">
+                    <h2>Islarts Forums</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Forum</a></li>
+                      <li><a href="#">Islart Forum</a></li>
+                    </ul>
+                  </div>
+                </li>
+                 <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts Wikis</a>
+                  <div class="mp-level">
+                    <h2>Islarts Wikis</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Wiki</a></li>
+                      <li><a href="#">Islart Wiki</a></li>
+                    </ul>
+                  </div>
+                </li>
+                 <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts Social Networkings</a>
+                  <div class="mp-level">
+                    <h2>Islarts Social Networkings</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Social Network</a></li>
+                      <li><a href="#">Islart Social Network</a></li>
+                    </ul>
+                  </div>
+                </li>
+                 <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts Ad Managements</a>
+                  <div class="mp-level">
+                    <h2>Islarts Ad Managements</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Ad Managements</a></li>
+                      <li><a href="#">Islart Ad Managements</a></li>
+                    </ul>
+                  </div>
+                </li>
+                 <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts Project Managements</a>
+                  <div class="mp-level">
+                    <h2>Islarts Project Managements</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Project Manager</a></li>
+                      <li><a href="#">Islart Project Manager</a></li>
+                    </ul>
+                  </div>
+                </li>
+                 <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts E-Commerce</a>
+                  <div class="mp-level">
+                    <h2>Islarts E-Commerce</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Forum</a></li>
+                      <li><a href="#">Islart Forum</a></li>
+                    </ul>
+                  </div>
+                </li>
+                 <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts Frameworks</a>
+                  <div class="mp-level">
+                    <h2>Islarts Frameworks</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart Framework</a></li>
+                      <li><a href="#">Islart Framework</a></li>
+                    </ul>
+                  </div>
+                </li>
+                 <li class="ion-chevron-left">
+                  <a class="ion-camera" href="#">Islarts DB Tools</a>
+                  <div class="mp-level">
+                    <h2>Islarts DB Tools</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li><a href="#">Islart DB Tool</a></li>
+                      <li><a href="#">Islart DB Tool</a></li>
+                    </ul>
+                  </div>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+          <li class="ion-chevron-left">
+            <a class="ion-document-text" href="#">Islarts Coding</a>
+            <div class="mp-level">
+              <h2 class="ion-document-text">Islarts Coding</h2>
+              <a class="mp-back" href="#">back</a>
+              <ul>
+                <li><a href="#">Islarts Coding Languages</a></li>
+                <li><a href="#">Islarts Scripts</a></li>
+                <li><a href="#">Islarts Plugins</a></li>
+                <li><a href="#">Islarts Apps </a></li>
+                <li><a href="#">Islarts Libraries</a></li>
+                <li><a href="#">Islarts Data Science</a></li>
+                <li><a href="#">Islarts Engineering</a></li>
+                <li><a href="#">Islarts Information Security</a></li>
+                <li><a href="#">Islarts Softwars Developements</a></li>
+                <li><a href="#">Islarts Networking</a></li>
+
+              </ul>
+            </div>
+          </li>
+          
+           <li class="ion-chevron-left">
+            <a class="ion-document-text" href="#">Islarts Audio</a>
+            <div class="mp-level">
+              <h2 class="ion-document-text">Islarts Audio</h2>
+              <a class="mp-back" href="#">back</a>
+              <ul>
+                <li><a href="#">Islarts Sounds</a></li>
+                <li><a href="#">Islarts Effects</a></li>
+              </ul>
+            </div>
+          </li>
+          
+            <li class="ion-chevron-left">
+            <a class="ion-document-text" href="#">Islarts video</a>
+            <div class="mp-level">
+              <h2 class="ion-document-text">Islarts videos</h2>
+              <a class="mp-back" href="#">back</a>
+              <ul>
+                <li><a href="#">Islarts Animations</a></li>
+                <li><a href="#">Islarts Motions</a></li>
+                <li><a href="#">Islarts Footage</a></li>
+                <li><a href="#">Islarts Films</a></li>
+                <li><a href="#">Islarts Gammings</a></li>
+                <li><a href="#">Islarts Mini Movies</a></li>
+                <li><a href="#">Islarts Product Videos</a></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="ion-chevron-left">
+            <a class="ion-document-text" href="#">Islarts Graphics</a>
+            <div class="mp-level">
+              <h2 class="ion-document-text">Islarts Graphics</h2>
+              <a class="mp-back" href="#">back</a>
+              <ul>
+                <li><a href="#">Islarts Graphic</a></li>
+                <li><a href="#">Islarts Printings</a></li>
+                <li><a href="#">Islarts Digitals</a></li>
+                <li><a href="#">Islarts Textures</a></li>
+                <li><a href="#">Islarts Vectors</a></li>
+                <li><a href="#">Islarts Icons</a></li>
+                <li><a href="#">Islarts Fonts</a></li>
+                <li><a href="#">Islarts Web Elements</a></li>
+                <li><a href="#">Islarts Assets</a></li>
+                <li><a href="#">Islarts Templates</a></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="ion-chevron-left">
+            <a class="ion-bag" href="#">Islarts 3D</a>
+            <div class="mp-level">
+              <h2 class="ion-bag">Islarts 3D</h2>
+              <a class="mp-back" href="#">back</a>
+              <ul>
+              <li><a href="#">Islarts Animations</a></li>
+              <li><a href="#">Islarts Models</a></li>
+              <li><a href="#">Islarts Renders</a></li>
+              <li><a href="#">Islarts Textures</a></li>
+              <li><a href="#">Islarts 2D concepts</a></li>
+              <li><a href="#">Islarts Scripts and Plugins</a></li>
+              
+                <li class="ion-chevron-left">
+                  <a class="ion-tshirt-outline" href="#">Materials</a>
+                  <div class="mp-level">
+                    <h2 class="ion-tshirt-outline">Materials</h2>
+                    <a class="mp-back" href="#">back</a>
+                    <ul>
+                      <li class="ion-chevron-left">
+                        <a class="ion-woman" href="#">Islarts</a>
+                        <div class="mp-level">
+                          <h2 class="ion-woman">Islarts</h2>
+                          <a class="mp-back" href="#">back</a>
+                          <ul>
+                            <li><a href="#">Islarts	</a></li>
+                            <li><a href="#">Islarts</a></li>
+                            <li><a href="#">Islarts</a></li>
+                            <li><a href="#">Islarts</a></li>
+                            <li><a href="#">Islarts</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="ion-chevron-left">
+                        <a class="ion-man" href="#">Islarts</a>
+                        <div class="mp-level">
+                          <h2 class="ion-man">Islarts</h2>
+                          <a class="mp-back" href="#">back</a>
+                          <ul>
+                            <li><a href="#">Islarts</a></li>
+                            <li><a href="#">Islarts</a></li>
+                            <li><a href="#">Islarts</a></li>
+                            <li><a href="#">Islarts</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a class="ion-star" href="#">Islarts</a></li>
+                <li><a class="ion-music-note" href="#">Islarts</a></li>
+                <li><a class="ion-coffee" href="#">Islarts</a></li>
+              </ul>
+            </div>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+   <div class="scroller">
+      <div class="scroller-inner">
+<div class="content clearfix">
+          <div class="block block-40 clearfix">
+            <p><a href="#" id="trigger"> <img src="ISLARTS_16x16.png">&nbsp;Categories</a></p>
+          </div>
+          <div class="block block-60"> 
+ 
+ 
+  <!-- multipush-->
+  
+  <!-- WeUI-->
+
+   
+    <div class="weui_cells weui_cells_form">
+      <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+          <div class="weui_uploader">
+            <div class="weui_uploader_hd weui_cell">
+          
+            </div>
+            <div class="weui_uploader_bd">
+              <ul class="weui_uploader_files">
+              
+<div id="weui_uploader_files">
+
+<!--<div id="heading">
+<h1>A really cool jQuery gallery</h1>
+</div>-->
+
+<div id="weui_uploader_file">
+
+<?php
+
+$directory = 'uploads';
+
+$allowed_types=array('jpg','jpeg','gif','png');
+$file_parts=array();
+$ext='';
+$title='';
+$i=0;
+
+$dir_handle = @opendir($directory) or die("There is an error with your image directory!");
+
+while ($file = readdir($dir_handle)) 
+{
+	if($file=='.' || $file == '..') continue;
+	
+	$file_parts = explode('.',$file);
+	$ext = strtolower(array_pop($file_parts));
+
+	$title = implode('.',$file_parts);
+	$title = htmlspecialchars($title);
+	
+	$nomargin='';
+	
+	if(in_array($ext,$allowed_types))
+	{
+		if(($i+1)%4==0) $nomargin='nomargin';
+	
+		echo '
+		<div class="pic '.$nomargin.'" style="background:url('.$directory.'/'.$file.') no-repeat 50% 50%;">
+		<a href="'.$directory.'/'.$file.'" title="'.$title.'" target="_blank">'.$title.'</a>
+		</div>';
+		
+		$i++;
+	}
+}
+
+closedir($dir_handle);
+
+?>
+
+
+
+</div>
+
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+
+
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- multipush-->
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+
+        <script src="js/categories_index.js"></script>
+    <!-- multipush-->
+  </body>
+</html>
