@@ -1,0 +1,32 @@
+body {
+  display: table ;
+  margin: auto;
+  padding-top: 5%;
+  background: #50A3A2;
+  
+}
+
+.star-eight {
+    background: #53E3A6;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    text-align: center;
+    -webkit-transform: rotate(0deg);
+       -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+         -o-transform: rotate(0eg);
+}
+.star-eight:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 150px;
+    width: 150px;
+    background: #53E3A6;
+    -webkit-transform: rotate(135deg);
+       -moz-transform: rotate(135deg);
+        -ms-transform: rotate(135deg);
+         -o-transform: rotate(135deg);
+}
